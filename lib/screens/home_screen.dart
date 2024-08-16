@@ -6,8 +6,34 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/bloc/weather_bloc_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Widget getWeatherIcon(int code) {
+    switch (code) {
+      case >= 200 && < 300:
+        return Image.asset('assets/img1.png');
+      case >= 300 && < 400:
+        return Image.asset('assets/img2.png');
+      case >= 500 && < 600:
+        return Image.asset('assets/img3.png');
+      case >= 600 && < 700:
+        return Image.asset('assets/img4.png');
+      case >= 700 && < 800:
+        return Image.asset('assets/img5.png');
+      case == 800:
+        return Image.asset('assets/img6.png');
+      case >= 800 && <= 804:
+        return Image.asset('assets/img7.png');
+      default:
+        return Image.asset('assets/img7.png');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${state.weather.areaName}',
+                            '📍${state.weather.areaName}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -86,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Image.asset('assets/img1.png'),
+                          getWeatherIcon(state.weather.weatherConditionCode!),
                           Center(
                             child: Text(
                               '${state.weather.temperature!.celsius!.round()}°C',
