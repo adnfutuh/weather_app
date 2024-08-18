@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
 import 'package:weather_app/bloc/weather_bloc_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -94,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '📍${state.weather.areaName}',
+                            '📍${state.weather.areaName},${state.weather.country}',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -102,14 +103,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 8,
+                            height: 30,
                           ),
                           const Text(
-                            'Good Moorning',
+                            'Good Morning Adnan',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            DateFormat("dd' 'MMMM' 'y")
+                                .format(state.weather.date!),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           getWeatherIcon(state.weather.weatherConditionCode!),
@@ -129,18 +142,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                          Center(
-                            child: Text(
-                              DateFormat('EEEE dd •')
-                                  .add_jm()
-                                  .format(state.weather.date!),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
